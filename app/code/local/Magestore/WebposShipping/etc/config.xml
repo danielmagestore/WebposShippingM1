@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_WebposShipping
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+<config>
+    <modules>
+        <Magestore_WebposShipping>
+            <version>1.0.0</version>
+        </Magestore_WebposShipping>
+    </modules>
+    <frontend>
+        <routers>
+            <webpossshipping>
+                <use>standard</use>
+                <args>
+                    <module>Magestore_WebposShipping</module>
+                    <frontName>webpossshipping</frontName>
+                </args>
+            </webpossshipping>
+        </routers>
+        <layout>
+            <updates>
+                <webpossshipping>
+                    <file>webpossshipping.xml</file>
+                </webpossshipping>
+            </updates>
+        </layout>
+    </frontend>
+    <global>
+        <models>
+            <webpossshipping>
+                <class>Magestore_WebposShipping_Model</class>
+                <resourceModel>Magestore_WebposShipping_mysql4</resourceModel>
+            </webpossshipping>
+            <webpossshipping_mysql4>
+                <class>Magestore_WebposShipping_Model_Mysql4</class>
+                <entities>
+                </entities>
+            </webpossshipping_mysql4>
+        </models>
+        <resources>
+            <webpossshipping_setup>
+                <setup>
+                    <module>Magestore_WebposShipping</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </webpossshipping_setup>
+            <webpossshipping_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </webpossshipping_write>
+            <webpossshipping_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </webpossshipping_read>
+        </resources>
+        <blocks>
+            <webpossshipping>
+                <class>Magestore_WebposShipping_Block</class>
+            </webpossshipping>
+        </blocks>
+        <helpers>
+            <webpossshipping>
+                <class>Magestore_WebposShipping_Helper</class>
+            </webpossshipping>
+        </helpers>
+        <events>
+            
+        </events>
+    </global>
+    <default>
+    </default>
+</config>
+
