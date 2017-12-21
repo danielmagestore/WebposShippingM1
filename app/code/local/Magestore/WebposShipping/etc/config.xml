@@ -53,6 +53,12 @@
                 <entities>
                 </entities>
             </webpossshipping_mysql4>
+            <webpos>
+                <rewrite>
+                    <source_adminhtml_shipping>Magestore_WebposShipping_Model_Rewrites_Webpos_Source_Adminhtml_Shipping</source_adminhtml_shipping>
+                    <source_adminhtml_shippingoffline>Magestore_WebposShipping_Model_Rewrites_Webpos_Source_Adminhtml_Shippingoffline</source_adminhtml_shippingoffline>
+                </rewrite>
+            </webpos>
         </models>
         <resources>
             <webpossshipping_setup>
