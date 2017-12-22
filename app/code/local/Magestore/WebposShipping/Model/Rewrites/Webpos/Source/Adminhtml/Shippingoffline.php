@@ -38,12 +38,13 @@ class Magestore_WebposShipping_Model_Rewrites_Webpos_Source_Adminhtml_Shippingof
             $methods = $carrier->getAllowedMethods();
             if(count($methods) > 0) {
                 foreach ($methods as $mcode => $method) {
-                    $methodCode = $code.'_'.$mcode;
                     if($code == "mpshippingcanadapostal"){
                         if (Mage::helper('core')->isModuleEnabled('Webkul_Mpshippingcanadapostal')) {
+                            $mcode = $method;
                             $method = Webkul_Mpshippingcanadapostal_Model_Config_Method::getName($method);
                         }
                     }
+                    $methodCode = $code.'_'.$mcode;
                     $title = $carrier->getConfigData('title') . ' - ' . $method;
                     if(($code == 'webpos_shipping') && ($mcode != 'storepickup')){
                         $title = $carrier->getConfigData('title') . ' - ' . $carrier->getConfigData($mcode.'_name');
@@ -63,6 +64,11 @@ class Magestore_WebposShipping_Model_Rewrites_Webpos_Source_Adminhtml_Shippingof
                 $methods = $carrier->getAllowedMethods();
                 if(count($methods) > 0){
                     foreach ($methods as $mcode => $method) {
+                        if($code == "mpshippingcanadapostal"){
+                            if (Mage::helper('core')->isModuleEnabled('Webkul_Mpshippingcanadapostal')) {
+                                $mcode = $method;
+                            }
+                        }
                         $methodCode = $code.'_'.$mcode;
                         $offlineMethods = Mage::getStoreConfig('webpos/shipping/specificshipping');
                         if (!in_array($code, $this->_allowShippings) || !in_array($methodCode, explode(',', $offlineMethods)))

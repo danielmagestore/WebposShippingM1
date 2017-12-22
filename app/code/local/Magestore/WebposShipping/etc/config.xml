@@ -26,69 +26,74 @@
     </modules>
     <frontend>
         <routers>
-            <webpossshipping>
+            <webposshipping>
                 <use>standard</use>
                 <args>
                     <module>Magestore_WebposShipping</module>
-                    <frontName>webpossshipping</frontName>
+                    <frontName>webposshipping</frontName>
                 </args>
-            </webpossshipping>
+            </webposshipping>
         </routers>
         <layout>
             <updates>
-                <webpossshipping>
-                    <file>webpossshipping.xml</file>
-                </webpossshipping>
+                <webposshipping>
+                    <file>webposshipping.xml</file>
+                </webposshipping>
             </updates>
         </layout>
     </frontend>
     <global>
         <models>
-            <webpossshipping>
+            <webposshipping>
                 <class>Magestore_WebposShipping_Model</class>
                 <resourceModel>Magestore_WebposShipping_mysql4</resourceModel>
-            </webpossshipping>
-            <webpossshipping_mysql4>
+            </webposshipping>
+            <webposshipping_mysql4>
                 <class>Magestore_WebposShipping_Model_Mysql4</class>
                 <entities>
                 </entities>
-            </webpossshipping_mysql4>
+            </webposshipping_mysql4>
             <webpos>
                 <rewrite>
                     <source_adminhtml_shipping>Magestore_WebposShipping_Model_Rewrites_Webpos_Source_Adminhtml_Shipping</source_adminhtml_shipping>
                     <source_adminhtml_shippingoffline>Magestore_WebposShipping_Model_Rewrites_Webpos_Source_Adminhtml_Shippingoffline</source_adminhtml_shippingoffline>
                 </rewrite>
             </webpos>
+            <!--<mpshippingcanadapostal>-->
+                <!--<rewrite>-->
+                    <!--<carrier_localdelivery>Magestore_WebposShipping_Model_Rewrites_Mpshippingcanadapostal_Carrier_LocalDelivery</carrier_localdelivery>-->
+                <!--</rewrite>-->
+            <!--</mpshippingcanadapostal>-->
         </models>
         <resources>
-            <webpossshipping_setup>
+            <webposshipping_setup>
                 <setup>
                     <module>Magestore_WebposShipping</module>
                 </setup>
                 <connection>
                     <use>core_setup</use>
                 </connection>
-            </webpossshipping_setup>
-            <webpossshipping_write>
+            </webposshipping_setup>
+            <webposshipping_write>
                 <connection>
                     <use>core_write</use>
                 </connection>
-            </webpossshipping_write>
-            <webpossshipping_read>
+            </webposshipping_write>
+            <webposshipping_read>
                 <connection>
                     <use>core_read</use>
                 </connection>
-            </webpossshipping_read>
+            </webposshipping_read>
         </resources>
         <blocks>
-            <webpossshipping>
+            <webposshipping>
                 <class>Magestore_WebposShipping_Block</class>
-            </webpossshipping>
+            </webposshipping>
         </blocks>
         <helpers>
-            <webpossshipping>
+            <webposshipping>
                 <class>Magestore_WebposShipping_Helper</class>
-            </webpossshipping>
+            </webposshipping>
         </helpers>
         <events>
             

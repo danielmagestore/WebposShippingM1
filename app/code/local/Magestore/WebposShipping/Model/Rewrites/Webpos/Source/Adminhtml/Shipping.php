@@ -37,11 +37,13 @@ class Magestore_WebposShipping_Model_Rewrites_Webpos_Source_Adminhtml_Shipping e
                 foreach ($methods as $mcode => $method) {
                     if($ccode == "mpshippingcanadapostal"){
                         if (Mage::helper('core')->isModuleEnabled('Webkul_Mpshippingcanadapostal')) {
+                            $mcode = $method;
                             $method = Webkul_Mpshippingcanadapostal_Model_Config_Method::getName($method);
                         }
                     }
+                    $methodCode = $ccode.'_'.$mcode;
                     $title = $carrier->getConfigData('title').' - '.$method;
-                    $options[] = array('value' => $ccode.'_'.$mcode, 'label' => $title);
+                    $options[] = array('value' => $methodCode, 'label' => $title);
                 }
             }
         }
@@ -56,6 +58,11 @@ class Magestore_WebposShipping_Model_Rewrites_Webpos_Source_Adminhtml_Shipping e
                 $methods = $carrier->getAllowedMethods();
                 if(count($methods) > 0) {
                     foreach ($methods as $mcode => $method) {
+                        if($code == "mpshippingcanadapostal"){
+                            if (Mage::helper('core')->isModuleEnabled('Webkul_Mpshippingcanadapostal')) {
+                                $mcode = $method;
+                            }
+                        }
                         $methodCode = $code . '_' . $mcode;
                         if($findCode == $methodCode){
                             if($code == 'webpos_shipping'){

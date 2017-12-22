@@ -54,9 +54,9 @@ define(
                 currentData.full_name = editCustomerModel.firstName() + ' ' + editCustomerModel.lastName();
                 CartModel.customerGroup(editCustomerModel.group_id());
 
+                editCustomerModel.showLoading();
                 var customerDeferred;
                 if (generalHelper.isOnlineCheckout()) {
-                    editCustomerModel.showLoading();
                     customerDeferred = CustomerFactory.get().setMode('online').load(currentData.id);
 				} else {
                     customerDeferred = CustomerFactory.get().setMode('offline').load(currentData.id);
@@ -99,6 +99,7 @@ define(
                         currentCustomerId = currentData.id;
                     }
 
+					editCustomerModel.showLoading();
                     var deferred;
                     if (generalHelper.isOnlineCheckout()) {
                         deferred = CustomerFactory.get().setMode('online').getCollection()
@@ -182,12 +183,17 @@ define(
                                         message: generalHelper.__('The customer is saved successfully.')
                                     }
                                 );
-                            });
+								editCustomerModel.hideLoading();
+                            }).fail(function(){
+								editCustomerModel.hideLoading();
+							});
                         }
-                    });
+                    }).fail(function(){
+						editCustomerModel.hideLoading();
+					});
                     //}
 
-                }).always(function(){
+                }).fail(function(){
                     editCustomerModel.hideLoading();
 				});
 
