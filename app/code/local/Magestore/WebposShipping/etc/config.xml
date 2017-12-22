@@ -57,6 +57,7 @@
                 <rewrite>
                     <source_adminhtml_shipping>Magestore_WebposShipping_Model_Rewrites_Webpos_Source_Adminhtml_Shipping</source_adminhtml_shipping>
                     <source_adminhtml_shippingoffline>Magestore_WebposShipping_Model_Rewrites_Webpos_Source_Adminhtml_Shippingoffline</source_adminhtml_shippingoffline>
+                    <checkout_create>Magestore_WebposShipping_Model_Rewrites_Webpos_Checkout_Create</checkout_create>
                 </rewrite>
             </webpos>
             <!--<mpshippingcanadapostal>-->

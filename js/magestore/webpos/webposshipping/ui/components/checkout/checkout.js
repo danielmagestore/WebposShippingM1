@@ -22,21 +22,27 @@ define(
     [
         'jquery',
         'ko',
-        'ui/components/checkout/checkout/shipping'
+        'ui/components/checkout/checkout',
+        'helper/general',
+        'webposshipping/model/checkout/shipping'
     ],
-    function ($, ko, Component) {
+    function ($, ko, Component, Helper, ShippingModel) {
         "use strict";
         return Component.extend({
             defaults: {
-                template: 'ui/webposshipping/checkout/checkout/shipping'
+                template: 'webposshipping/ui/checkout/checkout'
             },
-            isError: function (data) {
-                var isError = false;
-                if(data && data.code){
-                    var code = data.code;
-                    isError = code.endsWith("_error");
-                }
-                return isError;
+            isOnlineCheckout: Helper.isOnlineCheckout,
+            updatingShipping: ShippingModel.updatingShipping,
+            initialize: function(){
+                this._super();
+                var self = this;
+                Helper.observerEvent('go_to_checkout_page', function(){
+                    ShippingModel.autoCheckShipping();
+                });
+            },
+            updateShipping: function(){
+                ShippingModel.checkShipping();
             }
         });
     }

@@ -23,6 +23,11 @@
         <reference name="before_webpos_body_end">
             <block type="webposshipping/webposShipping" name="webposshipping" as="webposshipping" template="webposshipping/webposShipping.phtml"/>
         </reference>
+        <reference name="webpos_head_second">
+            <action method="addCss">
+                <stylesheet>magestore/webposshipping/css/style.css</stylesheet>
+            </action>
+        </reference>
         <reference name="webpos_content_main">
             <action method="addJsLayout">
                 <arg>
@@ -32,9 +37,10 @@
                                 <checkout>
                                     <children>
                                         <checkout>
+                                            <component>webposshipping/ui/components/checkout/checkout</component>
                                             <children>
                                                 <webpos_checkout_shipping>
-                                                    <component>ui/components/webposshipping/checkout/checkout/shipping</component>
+                                                    <component>webposshipping/ui/components/checkout/checkout/shipping</component>
                                                 </webpos_checkout_shipping>
                                             </children>
                                         </checkout>

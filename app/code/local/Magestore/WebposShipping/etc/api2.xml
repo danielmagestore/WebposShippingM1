@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+<config>
+    <api2>
+        <resources>
+            <webposshipping_checkout_check_shipping translate="title" module="api2">
+                <group>webpos</group>
+                <sort_order>16</sort_order>
+                <model>webposshipping/api2_shipping</model>
+                <title>Web POS Shipping</title>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_entity>
+                        <route>/webpos/checkout/checkShipping</route>
+                        <action_type>check_shipping</action_type>
+                    </route_entity>
+                </routes>
+                <versions>1</versions>
+            </webposshipping_checkout_check_shipping>
+        </resources>
+    </api2>
+</config>
