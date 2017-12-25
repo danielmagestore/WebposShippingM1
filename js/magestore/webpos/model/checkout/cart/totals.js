@@ -526,6 +526,7 @@ define([
         calcShippingTaxAmount: function(){
             var self = this;
             var shippingFee = self.shippingFee();
+            self.shippingTaxAmount(0);
             if((shippingFee && (shippingFee > 0)) && (!Helper.isOnlineCheckout() || !DataManager.getData('quote_id'))){
                 var taxRates = self.shippingTaxRates();
                 if(taxRates && (taxRates.length > 0)){
