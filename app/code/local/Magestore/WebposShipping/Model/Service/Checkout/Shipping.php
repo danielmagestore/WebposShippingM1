@@ -39,7 +39,7 @@ class Magestore_WebposShipping_Model_Service_Checkout_Shipping extends Magestore
         $status = Magestore_Webpos_Api_ResponseInterface::STATUS_SUCCESS;
         $checkout = $this->getCheckoutModel();
         $checkout->checkShipping($customerId, $items, $payment, $shipping, $config, $couponCode, $sessionData);
-        $this->_responseService->initQuote($checkout->getQuote());
+        $checkout->setQuoteId($checkout->getQuote()->getId());
         $data = $this->_getQuoteData(array(Magestore_Webpos_Api_Cart_QuoteDataInitInterface::SHIPPING), $checkout);
         return $this->getResponseData($data, $message, $status);
     }

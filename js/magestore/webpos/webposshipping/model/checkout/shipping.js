@@ -22,10 +22,11 @@ define(
     [
         'jquery',
         'ko',
+        'helper/general',
         'model/checkout/checkout',
         'webposshipping/model/resource-model/magento-rest/checkout/shipping'
     ],
-    function ($, ko, CheckoutModel, ShippingResource) {
+    function ($, ko, Helper, CheckoutModel, ShippingResource) {
         "use strict";
 
         var ShippingModel = {
@@ -40,7 +41,9 @@ define(
                 self.updatingShipping(true);
                 CheckoutModel.loading(true);
                 deferred.done(function (response) {
-
+                    if(response && response.data && response.data.shipping){
+                        self.initShipping(response.data.shipping);
+                    }
                 }).always(function () {
                     self.updatingShipping(false);
                     CheckoutModel.loading(false);
@@ -55,13 +58,22 @@ define(
                     self.updatingShipping(true);
                     self.autoCheckingShipping(true);
                     deferred.done(function (response) {
-
+                        if(response && response.data && response.data.shipping){
+                            self.initShipping(response.data.shipping);
+                        }
                     }).always(function () {
                         self.updatingShipping(false);
                         self.autoCheckingShipping(false);
                     });
                 }
                 return deferred;
+            },
+            initShipping: function(shipping){
+                if(shipping) {
+                    Helper.dispatchEvent('load_shipping_online_after', {
+                        items: shipping
+                    });
+                }
             }
         };
         return ShippingModel;

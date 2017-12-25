@@ -36,6 +36,8 @@ define([
         buttons: ko.observableArray(),
         shippingData: ko.observable(),
         shippingFee: ko.observable(0),
+        shippingTaxAmount: ko.observable(0),
+        shippingTaxRates: ko.observable([]),
         subtotal: ko.pureComputed(function () {
             var subtotal = 0;
             ko.utils.arrayForEach(Items.items(), function (item){
@@ -72,7 +74,6 @@ define([
         HOLD_BUTTON_TITLE: Helper.__("Hold"),
         CHECKOUT_BUTTON_TITLE: Helper.__("Checkout"),
         initialize: function () {
-            console.log('-----pp');
             var self = this;
             self.grandTotalBeforeDiscount = ko.pureComputed(function(){
                 var grandTotal = self.getPositiveTotal();
@@ -94,6 +95,11 @@ define([
                     ko.utils.arrayForEach(Items.items(), function (item) {
                         tax += item.tax_amount();
                     });
+                    var shippingTax = self.shippingTaxAmount();
+                    shippingTax = parseFloat(shippingTax);
+                    if(shippingTax && (shippingTax > 0)){
+                        tax += shippingTax;
+                    }
                 }
                 return tax;
             });
@@ -513,6 +519,43 @@ define([
             //     value: shippingFee
             // });
             this.shippingFee(shippingFee);
+
+            this.calcShippingTaxAmount();
+
+        },
+        calcShippingTaxAmount: function(){
+            var self = this;
+            var shippingFee = self.shippingFee();
+            if((shippingFee && (shippingFee > 0)) && (!Helper.isOnlineCheckout() || !DataManager.getData('quote_id'))){
+                var taxRates = self.shippingTaxRates();
+                if(taxRates && (taxRates.length > 0)){
+                    var shippingInclTax = window.webposConfig["tax/calculation/shipping_includes_tax"];
+                    if(shippingInclTax != 1){
+                        var shippingTaxAmount = 0;
+                        $.each(taxRates, function (index, rate) {
+                            var value = self.calcTaxAmount(shippingFee, rate, false, false);
+                            shippingTaxAmount += value;
+                            shippingFee += value;
+                        });
+                        self.shippingTaxAmount(shippingTaxAmount);
+                    }
+                }
+            }
+        },
+        calcTaxAmount: function(price, taxRate, priceIncludeTax, round){
+            taxRate = taxRate / 100;
+
+            if (priceIncludeTax) {
+                var amount = price * (1 - 1 / (1 + taxRate));
+            } else {
+                var amount = price * taxRate;
+            }
+
+            if (round) {
+                return Helper.round(amount);
+            }
+
+            return amount;
         },
         collectTaxTotal: function () {
             // var tax = 0;

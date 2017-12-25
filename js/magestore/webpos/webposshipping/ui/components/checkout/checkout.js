@@ -38,7 +38,9 @@ define(
                 this._super();
                 var self = this;
                 Helper.observerEvent('go_to_checkout_page', function(){
-                    ShippingModel.autoCheckShipping();
+                    if(!self.isOnlineCheckout()){
+                        ShippingModel.autoCheckShipping();
+                    }
                 });
             },
             updateShipping: function(){

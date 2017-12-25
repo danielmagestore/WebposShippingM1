@@ -37,7 +37,6 @@ class Magestore_WebposShipping_Model_Api2_Shipping_Rest_Admin_V1 extends Magesto
      */
     public function dispatch()
     {
-        ini_set('display_errors', 1);
         $this->_initStore();
 
         switch ($this->getActionType()) {
